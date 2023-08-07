@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>989</width>
-    <height>829</height>
+    <width>799</width>
+    <height>780</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -229,8 +229,11 @@ background-color: rgb(136, 136, 136);
                <property name="maximum">
                 <number>100</number>
                </property>
+               <property name="singleStep">
+                <number>1</number>
+               </property>
                <property name="pageStep">
-                <number>100</number>
+                <number>1</number>
                </property>
                <property name="value">
                 <number>0</number>
@@ -280,10 +283,13 @@ background-color: rgb(136, 136, 136);
                 </size>
                </property>
                <property name="maximum">
-                <number>100</number>
+                <number>1000</number>
+               </property>
+               <property name="singleStep">
+                <number>1</number>
                </property>
                <property name="pageStep">
-                <number>100</number>
+                <number>1</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -330,9 +336,15 @@ background-color: rgb(136, 136, 136);
                 </size>
                </property>
                <property name="minimum">
-                <number>-50</number>
+                <number>0</number>
                </property>
                <property name="maximum">
+                <number>1000</number>
+               </property>
+               <property name="pageStep">
+                <number>1</number>
+               </property>
+               <property name="value">
                 <number>0</number>
                </property>
                <property name="orientation">
@@ -363,7 +375,7 @@ background-color: rgb(136, 136, 136);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>989</width>
+     <width>799</width>
      <height>21</height>
     </rect>
    </property>
