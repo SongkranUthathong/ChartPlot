@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from Object.ChartObject import *
 from Object.Connect import *
 from Object.Exception import *
+from Object.ScaleAdjust import*
 
 class MyWindow(QMainWindow):
     def __init__(self):
@@ -19,6 +20,7 @@ class MyWindow(QMainWindow):
 
     # region --------------> [ Instance Widget UI ] <--------------
         self.chartFT = ForceTorqeChart(self)
+        self.scaleAdjust = ScalePlotAdjust(self)
         URConnect(self)
     # endregion
 

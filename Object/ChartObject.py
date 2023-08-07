@@ -7,6 +7,7 @@ from PyQt5.QtCore import QObject, Qt, QTimer,QThread, pyqtSignal
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
+
 from Object.Exception import *
 from rtde_receive import RTDEReceiveInterface as RTDEReceive
 
@@ -38,37 +39,16 @@ class CustomThread(QThread):
         # msgPrint("Task completed!")
 
 
-class AnimatedPlotWidget(QWidget):
+class PlotProfile(QWidget):
     def __init__(self, parent=None):
-        super(AnimatedPlotWidget, self).__init__(parent)
-        # Create a Figure instance
+        super(PlotProfile, self).__init__(parent)
         self.figure, self.ax = plt.subplots()
-        # self.figure = Figure()
-
-        # Create a FigureCanvasQTAgg instance
         self.canvas = FigureCanvas(self.figure)
-        # Initialize the plot data
-        self.x = np.linspace(0, 5000,5000)
-        # print(len(self.x))
-        # self.y = np.sin(self.x)
-        self.y = np.linspace(-2,0,5000)
-        print(self.y)
-
+        self.x = np.linspace(0, int(5000/100),5000)
+        self.y = np.linspace(0,1,5000)
         # Create the plot line
         self.plot_line, = self.ax.plot(self.x, self.y)
-
         self.ax.draw_artist(self.plot_line)
-        
-
-        # # Create a timer to update the plot at regular intervals
-        # self.timer = QTimer(self)
-        # self.timer.timeout.connect(self.update_plot1)
-        # self.timer.start(10)  # Update the plot every 100 milliseconds
-
-        # # Create a layout for the widget and add the canvas to it
-        # layout = QVBoxLayout()
-        # layout.addWidget(self.canvas)
-        # self.setLayout(layout)
 
 class ForceTorqeChart(QMainWindow):
     def __init__(self,MainWindows):
@@ -79,7 +59,7 @@ class ForceTorqeChart(QMainWindow):
 
         self.MainWindows = MainWindows
 
-        self.animated_widget1 = AnimatedPlotWidget(self)
+        self.animated_widget1 = PlotProfile(self)
 
         layout1 = QVBoxLayout()
         layout1.addWidget(self.animated_widget1.canvas)
@@ -106,6 +86,7 @@ class ForceTorqeChart(QMainWindow):
     def on_thread_signal(self, FTSensor):
         try:
             self.animated_widget1.plot_line.set_ydata(FTSensor)
+
             self.animated_widget1.ax.draw_artist(self.animated_widget1.plot_line)
             self.animated_widget1.canvas.blit(self.animated_widget1.figure.bbox)
             self.animated_widget1.canvas.flush_events()
@@ -113,6 +94,64 @@ class ForceTorqeChart(QMainWindow):
             self.j += 1
         except Exception as e:
             msgPrint(str(e))
+
+    def addjust_Plort(self):
+        try:
+            pass
+            scale_x = self.MainWindows.scaleX.value() / 100
+            scale_y = self.MainWindows.scaleYP.value() / 100
+            # Generate sample data
+            x = np.linspace(self.MainWindows.scaleYN.value(), 100*scale_x, 5000)
+            y = np.sin(x)
+
+            # Update the plot with the scaled data
+            self.animated_widget1.ax.clear()
+            self.animated_widget1.ax.plot(x, y * scale_y)
+            self.animated_widget1.ax.set_xlabel("X Axis")
+            self.animated_widget1.ax.set_ylabel("Y Axis")
+
+            # Redraw the plot
+            self.animated_widget1.canvas.draw()
+            
+        except Exception as e:
+            msgPrint(str(e))
+
+    def scalueX_Adjust(self):
+        try:
+            __xScale = self.MainWindows.scaleX.value()
+            msgPrint(self.MainWindows.scaleX.value())
+            self.animated_widget1.x = np.linspace(0, int(__xScale/100),__xScale)
+            self.animated_widget1.y = np.linspace(0,1,__xScale)
+
+            print(self.animated_widget1.x)
+
+            # self.animated_widget1.plot_line, = self.animated_widget1.ax.plot(self.animated_widget1.x, self.animated_widget1.y)
+
+            # self.animated_widget1.plot_line.set_ydata(self.animated_widget1.y)
+            self.animated_widget1.plot_line, = self.animated_widget1.ax.plot(self.animated_widget1.x, self.animated_widget1.y)
+
+            self.animated_widget1.ax.draw_artist(self.animated_widget1.plot_line)
+            self.animated_widget1.canvas.blit(self.animated_widget1.figure.bbox)
+            self.animated_widget1.canvas.flush_events()
+            self.animated_widget1.canvas.draw()
+            pass
+        except Exception as e:
+            msgPrint(str(e))
+    
+    def scalueYP_Adjust(self):
+        try:
+            msgPrint(self.MainWindows.scaleYP.value())
+            pass
+        except Exception as e:
+            msgPrint(str(e))
+
+    def scalueYN_Adjust(self):
+        try:
+            msgPrint(self.MainWindows.scaleYN.value())
+            pass
+        except Exception as e:
+            msgPrint(str(e))
+
 
 
 
