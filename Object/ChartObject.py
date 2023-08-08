@@ -11,8 +11,8 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from Object.Exception import *
 from rtde_receive import RTDEReceiveInterface as RTDEReceive
 
-MAX = 200
-MS = 50
+MAX = 100
+MS = 10
 class CustomThread(QThread):
 
     signal = pyqtSignal(list)
@@ -20,7 +20,7 @@ class CustomThread(QThread):
     def __init__(self, parent=None):
         super(CustomThread, self).__init__(parent)
         # self.rtde_r = rtde_receive.RTDEReceiveInterface("192.168.47.128")
-        self.rtde_r = RTDEReceive("192.168.47.128")
+        self.rtde_r = RTDEReceive("192.168.1.123")
         self.count = 1
         self.FX = [0] * MAX
         self.FY = [0] * MAX
@@ -31,9 +31,11 @@ class CustomThread(QThread):
     def run(self):
         # This method will be executed in a separate thread
         while True:
-            actual_q = self.rtde_r.getActualQ()
+            actual_q = self.rtde_r.getActualTCPForce()
+            # actual_q = self.rtde_r.getFtRawWrench()
+            # actual_q = self.rtde_r.getActualQ()
             r2d = [180/np.pi]*6
-            actual_q = [actual_q[i] * r2d[i] for i in range(len(actual_q))]
+            # actual_q = [actual_q[i] * r2d[i] for i in range(len(actual_q))]
             for i in range(MAX):
                 if i < MAX - 1:
                     self.FX[i] = self.FX[i+1]
@@ -61,8 +63,8 @@ class PlotProfile(QWidget):
         self.canvas = FigureCanvas(self.figure)
         self.sampling_interval = 1 / MS
         self.time_in_sec = np.arange(MAX) * self.sampling_interval
-        # self.x = np.linspace(0, 1/MS,num=MAX)
-        # self.y = np.linspace(0,0,MAX)
+        # print(len(self.time_in_sec))
+
 
 class ForceTorqeChart(QMainWindow):
     def __init__(self,MainWindows):
@@ -79,14 +81,19 @@ class ForceTorqeChart(QMainWindow):
         self.animated_widget2.ax.set_xlabel("Time (s)")
         self.animated_widget2.ax.set_ylabel("N*m")
         self.animated_widget2.ax.set_title('TORQUE')
-        self.ChartFX = self.animated_widget1.ax.plot(0,0,c='r',label='FX :{} N'.format(10))[0]
-        self.ChartFY = self.animated_widget1.ax.plot(0,0,c='g',label='FY :{} N'.format(10))[0]
-        self.ChartFZ = self.animated_widget1.ax.plot(0,0,c='b',label='FZ :{} N'.format(10))[0]
+        self.animated_widget1.ax.set_xlim(0,10)
+        self.animated_widget2.ax.set_xlim(0,10)
+        self.animated_widget1.ax.set_ylim(-1,1)
+        self.animated_widget2.ax.set_ylim(-1,1)
+        self.ChartFX = self.animated_widget1.ax.plot(0,0,c='r',label='FX')[0]
+        self.ChartFY = self.animated_widget1.ax.plot(0,0,c='g',label='FY')[0]
+        self.ChartFZ = self.animated_widget1.ax.plot(0,0,c='b',label='FZ')[0]
 
-        self.ChartTX = self.animated_widget2.ax.plot(0,0,c='r',label='TX :{} N'.format(10))[0]
-        self.ChartTY = self.animated_widget2.ax.plot(0,0,c='g',label='TY :{} N'.format(10))[0]
-        self.ChartTZ = self.animated_widget2.ax.plot(0,0,c='b',label='TZ :{} N'.format(10))[0]
+        self.ChartTX = self.animated_widget2.ax.plot(0,0,c='r',label='TX')[0]
+        self.ChartTY = self.animated_widget2.ax.plot(0,0,c='g',label='TY')[0]
+        self.ChartTZ = self.animated_widget2.ax.plot(0,0,c='b',label='TZ')[0]
         self.animated_widget1.ax.legend()
+        self.animated_widget2.ax.legend()
         layout1 = QVBoxLayout()
         layout1.addWidget(self.animated_widget1.canvas)
         layout2 = QVBoxLayout()
@@ -116,35 +123,45 @@ class ForceTorqeChart(QMainWindow):
 
     def on_thread_signal(self, FTSensor):
         try:
+            self._NDF = FTSensor
             # Set Data for FX
             self.ChartFX.set_ydata(FTSensor[0])
-            self.ChartFX.set_xdata(self.animated_widget1.time_in_sec)
+            # self.ChartFX.set_xdata(self.animated_widget1.time_in_sec)
+            self.ChartFX.set_xdata(np.linspace(0,10,MAX))
             # Set Data for FY
             self.ChartFY.set_ydata(FTSensor[1])
-            self.ChartFY.set_xdata(self.animated_widget1.time_in_sec)
+            # self.ChartFY.set_xdata(self.animated_widget1.time_in_sec)
+            self.ChartFY.set_xdata(np.linspace(0,10,MAX))
             # # Set Data for FZ
             self.ChartFZ.set_ydata(FTSensor[2])
-            self.ChartFZ.set_xdata(self.animated_widget1.time_in_sec)
-            # Set Data for TX
-            self.ChartTX.set_ydata(FTSensor[3])
-            self.ChartTX.set_xdata(self.animated_widget2.time_in_sec)
-            # Set Data for TY
-            self.ChartTY.set_ydata(FTSensor[4])
-            self.ChartTY.set_xdata(self.animated_widget2.time_in_sec)
-            # # Set Data for TZ
-            self.ChartTZ.set_ydata(FTSensor[5])
-            self.ChartTZ.set_xdata(self.animated_widget2.time_in_sec)
+            # self.ChartFZ.set_xdata(self.animated_widget1.time_in_sec)
+            self.ChartFZ.set_xdata(np.linspace(0,10,MAX))
+
+
+            # # Set Data for TX
+            # self.ChartTX.set_ydata(FTSensor[3])
+            # # self.ChartTX.set_xdata(self.animated_widget2.time_in_sec)
+            # self.ChartTX.set_xdata(np.linspace(0,10,MAX))
+            # # Set Data for TY
+            # self.ChartTY.set_ydata(FTSensor[4])
+            # # self.ChartTY.set_xdata(self.animated_widget2.time_in_sec)
+            # self.ChartTY.set_xdata(np.linspace(0,10,MAX))
+            # # # Set Data for TZ
+            # self.ChartTZ.set_ydata(FTSensor[5])
+            # # self.ChartTZ.set_xdata(self.animated_widget2.time_in_sec)
+            # self.ChartTZ.set_xdata(np.linspace(0,10,MAX))
+
 
             # UPDATE CHART
             self.animated_widget1.canvas.blit(self.animated_widget1.figure.bbox)
             self.animated_widget1.canvas.flush_events()
             self.animated_widget1.canvas.draw()
 
-            self.animated_widget2.canvas.blit(self.animated_widget2.figure.bbox)
-            self.animated_widget2.canvas.flush_events()
-            self.animated_widget2.canvas.draw()
+            # self.animated_widget2.canvas.blit(self.animated_widget2.figure.bbox)
+            # self.animated_widget2.canvas.flush_events()
+            # self.animated_widget2.canvas.draw()
 
-            # msgPrint(FTSensor)
+            # msgPrint(self._NDF[0][MAX-1])
         except Exception as e:
             msgPrint(str(e))
 
@@ -156,12 +173,11 @@ class ForceTorqeChart(QMainWindow):
             scale_yn = self.MainWindows.scaleYN.value()
             # Generate sample data
 
-
             # Update the plot with the scaled data
             self.animated_widget1.ax.set_xlim(0,scale_x/10)
-            self.animated_widget1.ax.set_ylim((scale_yn/10)*-1,scale_yp/10)
+            self.animated_widget1.ax.set_ylim((scale_yn/100)*-1,scale_yp/100)
             self.animated_widget2.ax.set_xlim(0,scale_x/10)
-            self.animated_widget2.ax.set_ylim((scale_yn/10)*-1,scale_yp/10)
+            self.animated_widget2.ax.set_ylim((scale_yn/100)*-1,scale_yp/100)
             # Redraw the plot
             # self.animated_widget1.canvas.draw()
 
