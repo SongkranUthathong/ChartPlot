@@ -12,6 +12,9 @@ class ScalePlotAdjust(QMainWindow):
         self.MainWindows.scaleX.valueChanged.connect(self.MainWindows.chartFT.addjust_Plort)
         self.MainWindows.scaleYP.valueChanged.connect(self.MainWindows.chartFT.addjust_Plort)
         self.MainWindows.scaleYN.valueChanged.connect(self.MainWindows.chartFT.addjust_Plort)
+        self.MainWindows.txt_fx.setStyleSheet("QLabel#txt_fx { font-size:14pt; font-weight:600; color:#ff0000; }")
+        self.MainWindows.txt_fy.setStyleSheet("QLabel#txt_fy { font-size:14pt; font-weight:600; color:#00ff00; }")
+        self.MainWindows.txt_fz.setStyleSheet("QLabel#txt_fz { font-size:14pt; font-weight:600; color:#00ffff; }")
         self.loadSetValue()
 
     def loadSetValue(self):
@@ -24,6 +27,10 @@ class ScalePlotAdjust(QMainWindow):
             self.MainWindows.scaleX.setValue(file_contents['x_scale'])
             self.MainWindows.scaleYP.setValue(file_contents['yp_scale'])
             self.MainWindows.scaleYN.setValue(file_contents['yn_scale'])
+            self.MainWindows.edit_IP.setText(file_contents['ip'])
+            self.MainWindows.x_scale.setText('X : {}'.format(int(self.MainWindows.scaleX.value()/10)))
+            self.MainWindows.yp_scale.setText('Y : {}'.format(int(self.MainWindows.scaleYP.value()/100)))
+            self.MainWindows.yn_scale.setText('Y : -{}'.format(int(self.MainWindows.scaleYN.value()/100)))
             pass
         except Exception as e:
             msgPrint(str(e))
@@ -37,6 +44,7 @@ class ScalePlotAdjust(QMainWindow):
                 __scale['x_scale'] = self.MainWindows.scaleX.value()
                 __scale['yp_scale'] = self.MainWindows.scaleYP.value()
                 __scale['yn_scale'] = self.MainWindows.scaleYN.value()
+                __scale['ip'] = self.MainWindows.edit_IP.text()
                 # config_json['ip'] = self.data_configuration
             with open(_dir1, 'w') as f:
                 json.dump(__scale, f)

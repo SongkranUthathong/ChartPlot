@@ -99,20 +99,20 @@ background-color: rgb(136, 136, 136);
               <number>0</number>
              </property>
              <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="ip_label">
                <property name="text">
-                <string>TextLabel</string>
+                <string>IP/Addess</string>
                </property>
               </widget>
              </item>
              <item alignment="Qt::AlignLeft|Qt::AlignTop">
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QLineEdit" name="edit_IP"/>
              </item>
             </layout>
            </widget>
           </item>
           <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="btn_start">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -179,87 +179,235 @@ background-color: rgb(136, 136, 136);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item alignment="Qt::AlignBottom">
-           <widget class="QLabel" name="label_2">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Scale Addjust</string>
-            </property>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignLeft">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
            <widget class="QFrame" name="frame_4">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QSlider" name="scaleX">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item alignment="Qt::AlignLeft">
+              <widget class="QFrame" name="frame_7">
                <property name="minimumSize">
                 <size>
-                 <width>400</width>
+                 <width>500</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>1000</width>
-                 <height>16777215</height>
+                 <width>16777215</width>
+                 <height>200</height>
                 </size>
                </property>
-               <property name="minimum">
-                <number>0</number>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
-               <property name="maximum">
-                <number>100</number>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-               <property name="singleStep">
-                <number>1</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="value">
-                <number>0</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="x_scale">
-               <property name="text">
-                <string>X : ###</string>
-               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_3">
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Scale Addjust</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_9">
+                  <property name="minimumSize">
+                   <size>
+                    <width>500</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                   <item>
+                    <widget class="QSlider" name="scaleX">
+                     <property name="minimumSize">
+                      <size>
+                       <width>400</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>1000</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>100</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="pageStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>1</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignRight|Qt::AlignBottom">
+                    <widget class="QLabel" name="x_scale">
+                     <property name="text">
+                      <string>X : ###</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_10">
+                  <property name="minimumSize">
+                   <size>
+                    <width>500</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_3">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <item>
+                    <widget class="QSlider" name="scaleYP">
+                     <property name="minimumSize">
+                      <size>
+                       <width>400</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>1000</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="maximum">
+                      <number>10000</number>
+                     </property>
+                     <property name="singleStep">
+                      <number>1</number>
+                     </property>
+                     <property name="pageStep">
+                      <number>1</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignRight|Qt::AlignBottom">
+                    <widget class="QLabel" name="yp_scale">
+                     <property name="text">
+                      <string>Y : ###</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_11">
+                  <property name="minimumSize">
+                   <size>
+                    <width>500</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <property name="spacing">
+                    <number>10</number>
+                   </property>
+                   <item>
+                    <widget class="QSlider" name="scaleYN">
+                     <property name="minimumSize">
+                      <size>
+                       <width>400</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>1000</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="minimum">
+                      <number>0</number>
+                     </property>
+                     <property name="maximum">
+                      <number>10000</number>
+                     </property>
+                     <property name="pageStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>0</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item alignment="Qt::AlignRight|Qt::AlignBottom">
+                    <widget class="QLabel" name="yn_scale">
+                     <property name="text">
+                      <string>Y : -###</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item alignment="Qt::AlignLeft">
+          <item>
            <widget class="QFrame" name="frame_5">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>0</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(59, 59, 59);</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -267,96 +415,139 @@ background-color: rgb(136, 136, 136);
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
-              <widget class="QSlider" name="scaleYP">
-               <property name="minimumSize">
-                <size>
-                 <width>400</width>
-                 <height>0</height>
-                </size>
+              <widget class="QLabel" name="label_3">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>1000</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="maximum">
-                <number>10000</number>
-               </property>
-               <property name="singleStep">
-                <number>1</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="label">
                <property name="text">
-                <string>Y : ###</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;TCP FORCE (N)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignLeft">
-           <widget class="QFrame" name="frame_7">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_7">
-             <item>
-              <widget class="QSlider" name="scaleYN">
-               <property name="minimumSize">
-                <size>
-                 <width>400</width>
-                 <height>0</height>
-                </size>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QFrame" name="frame_12">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>1000</width>
-                 <height>16777215</height>
-                </size>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-               <property name="minimum">
-                <number>0</number>
-               </property>
-               <property name="maximum">
-                <number>10000</number>
-               </property>
-               <property name="pageStep">
-                <number>1</number>
-               </property>
-               <property name="value">
-                <number>0</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="label_4">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;FX : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="txt_fx">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;123.456&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
-             <item alignment="Qt::AlignBottom">
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Y : -###</string>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QFrame" name="frame_13">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="label_5">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;FY : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="txt_fy">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ff00;&quot;&gt;123.456&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignLeft">
+              <widget class="QFrame" name="frame_14">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="label_7">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;FZ : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QLabel" name="txt_fz">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ffff;&quot;&gt;123.456&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>

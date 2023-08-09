@@ -10,7 +10,7 @@ class URConnect(QMainWindow):
 
         # Initialize Object
         self.MainWindows = MainWindows
-        self.MainWindows.pushButton_2.clicked.connect(self.__Connect)
+        self.MainWindows.btn_start.clicked.connect(self.__Connect)
         
 
     def __Connect(self):
